@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import SideBar from "@/components/SideBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,28 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-[calc(100vh-80px)] flex flex-col bg-neutral-900 text-white">
+        {/* 1. Navbar stays on top as a direct child of the flex-col body */}
+        <nav className="">
+          <Navbar />
+        </nav>
+
+        {/* 2. New wrapper div for the side-by-side layout */}
+        <div className="flex flex-1 overflow-hidden">
+          {/* 3. Sidebar (Fixed width) */}
+          <SideBar />
+
+          {/* 4. Main content (Takes up remaining space) */}
+          <main className="flex-1 overflow-y-auto">{children}</main>
+        </div>
+        <footer className="bg-neutral-950 py-4">
+          <div className="container mx-auto px-4">
+            <p className="text-center text-gray-400">
+              © {new Date().getFullYear()} Motion Lab. All rights reserved.
+            </p>
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }
