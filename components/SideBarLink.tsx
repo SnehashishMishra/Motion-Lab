@@ -1,17 +1,17 @@
-"use client"; // 1. CRITICAL: Required for Framer Motion interactivity in Next.js
+"use client";
 
-import Link from "next/link"; // 2. Corrected import
+import React from "react";
+import Link from "next/link";
 import { motion, Variants } from "motion/react";
 
 type SideBarLinksProps = {
   name: string;
   href: string;
+  icon: React.ElementType;
 };
 
-// 3. THE MAGIC FIX: Use `motion.create()` for strict TypeScript compatibility
 const MotionLink = motion.create(Link);
 
-// Defined outside to prevent unnecessary re-renders
 const underlineVariants: Variants = {
   initial: {
     scaleX: 0,
@@ -27,20 +27,24 @@ const underlineVariants: Variants = {
   },
 };
 
-const SideBarLink = ({ name, href }: SideBarLinksProps) => {
+const SideBarLink = ({ name, href, icon: Icon }: SideBarLinksProps) => {
   return (
-    <div className="flex gap-4">
-      {/* 4. Use your newly created type-safe MotionLink */}
+    <div className="flex w-full">
       <MotionLink
         href={href}
-        className="relative px-1 py-0.5 hover:text-cyan-500 transition-colors duration-300"
+        className="relative flex items-center gap-4 px-2.5 py-2.5 w-full rounded-lg text-neutral-300 hover:text-cyan-400 hover:bg-white/5 transition-all duration-300 overflow-hidden"
         initial="initial"
         whileHover="hover"
       >
-        {name}
+        <span className="flex shrink-0 items-center justify-center">
+          <Icon size={22} strokeWidth={1.5} />
+        </span>
+        <span className="whitespace-nowrap font-medium text-[15px]">
+          {name}
+        </span>
 
         <motion.span
-          className="absolute left-0 bottom-0 w-full h-px bg-linear-to-r from-transparent via-cyan-500 to-transparent"
+          className="absolute left-0 bottom-0 w-full h-px bg-linear-to-r from-transparent via-cyan-500/50 to-transparent"
           variants={underlineVariants}
         />
       </MotionLink>
