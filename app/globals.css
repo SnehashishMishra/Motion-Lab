@@ -129,6 +129,10 @@
   /* html {
     @apply font-sans;
   } */
+
+  button {
+    @apply cursor-pointer;
+  }
 }
 
 @utility shadow-inset-soft {

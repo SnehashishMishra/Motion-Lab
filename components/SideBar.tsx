@@ -1,47 +1,115 @@
-"use client";
-
+import {
+  ChartBarIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  HomeIcon,
+  SettingsIcon,
+  UserIcon,
+} from "lucide-react";
+import { delay } from "motion";
 import { motion } from "motion/react";
-import React from "react";
-import SideBarLink from "./SideBarLink";
-import { MousePointerClick, Image, Blocks } from "lucide-react";
-
-type ComponentLink = {
-  name: string;
-  href: string;
-  icon: React.ElementType;
-};
-
-const components: ComponentLink[] = [
-  { name: "Button", href: "/button", icon: MousePointerClick },
-  { name: "Card", href: "/card", icon: Image },
-];
+import React, { useState } from "react";
 
 const SideBar = () => {
-  return (
-    <motion.aside
-      initial={{ width: "4.5rem" }}
-      whileHover={{ width: "16rem" }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="sticky top-0 flex-shrink-0 h-[100dvh] z-40 bg-neutral-950/40 border-r border-white/5 backdrop-blur-md overflow-y-auto overflow-x-hidden bg-dot-pattern pt-28 pb-6 px-3 flex flex-col group"
-    >
-      <div className="flex items-center gap-4 px-2.5 mb-8 text-neutral-500 group-hover:text-cyan-500 transition-colors duration-300">
-        <Blocks size={24} strokeWidth={1.5} className="flex-shrink-0" />
-        <span className="font-semibold text-xs tracking-widest uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          Components
-        </span>
-      </div>
+  const [isOpen, setIsOpen] = useState(true);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+  const links = [
+    {
+      name: "Home",
+      href: "/",
+      icon: <HomeIcon />,
+    },
+    {
+      name: "Analytics",
+      href: "/analytics",
+      icon: <ChartBarIcon />,
+    },
+    {
+      name: "Users",
+      href: "/users",
+      icon: <UserIcon />,
+    },
+    {
+      name: "Settings",
+      href: "/settings",
+      icon: <SettingsIcon />,
+    },
+  ];
 
-      <div className="flex flex-col gap-2 w-full">
-        {components.map((component) => (
-          <SideBarLink
-            key={component.name}
-            name={component.name}
-            href={component.href}
-            icon={component.icon}
-          />
-        ))}
-      </div>
-    </motion.aside>
+  const sidebarVariants = {
+    open: { width: "16rem" },
+    closed: { width: "4.5rem" },
+  };
+
+  const parentVariants = {
+    open: {
+      transition: {
+        staggerChildren: 0.07,
+        delayChildren: 0.2,
+      },
+    },
+    closed: {
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+      },
+    },
+  };
+
+  const childVariants = {
+    open: { opacity: 1, y: 0 },
+    closed: { opacity: 0, y: -10 },
+  };
+
+  return (
+    <motion.div
+      initial={false}
+      animate={isOpen ? "open" : "closed"}
+      exit={"closed"}
+      transition={{ duration: 0.3 }}
+      className="border-r border-neutral-100 h-full"
+    >
+      <motion.nav
+        variants={sidebarVariants}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={`bg-white shadow-md h-full`}
+      >
+        <div className="p-4 flex justify-between items-center">
+          <h2 className={`text-xl font-semibold ${!isOpen && "sr-only"}`}>
+            Dashboard
+          </h2>
+          {/* Toggle button */}
+          <button
+            onClick={toggleSidebar}
+            className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none"
+            aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
+          >
+            {isOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </button>
+        </div>
+        <div className="relative">
+          {/* Sidebar content */}
+          <nav className="p-4">
+            <motion.ul variants={parentVariants} className="space-y-2">
+              {links.map((link) => (
+                <motion.li variants={childVariants} key={link.name}>
+                  <a
+                    href={link.href}
+                    className="flex items-center gap-4 p-2 text-gray-700 rounded hover:bg-gray-200"
+                    title={!isOpen ? link.name : ""}
+                  >
+                    {link.icon}
+                    {isOpen && link.name}
+                  </a>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </nav>
+        </div>
+      </motion.nav>
+    </motion.div>
   );
 };
 
