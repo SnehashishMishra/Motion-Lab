@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 import React from "react";
 import SideBarLink from "./SideBarLink";
 import { MousePointerClick, Image, Blocks } from "lucide-react";
@@ -18,6 +18,30 @@ const components: ComponentLink[] = [
   { name: "Dashboard", href: "/dashboard", icon: IconPackage },
 ];
 
+const childVariants: Variants = {
+  initial: { opacity: 0, y: -10 },
+  animate: { opacity: 1, y: 0 },
+};
+
+const parentVariants: Variants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.07,
+      delayChildren: 0.2,
+    },
+  },
+  hover: {
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
+  },
+};
+
 const SideBar2 = () => {
   return (
     <motion.aside
@@ -33,16 +57,22 @@ const SideBar2 = () => {
         </span>
       </div>
 
-      <div className="flex flex-col gap-2 w-full">
+      <motion.ul
+        initial="initial"
+        animate="animate"
+        variants={parentVariants}
+        className="flex flex-col gap-2 w-full"
+      >
         {components.map((component) => (
-          <SideBarLink
-            key={component.name}
-            name={component.name}
-            href={component.href}
-            icon={component.icon}
-          />
+          <motion.li variants={childVariants} key={component.name} className="flex">
+            <SideBarLink
+              name={component.name}
+              href={component.href}
+              icon={component.icon}
+            />
+          </motion.li>
         ))}
-      </div>
+      </motion.ul>
     </motion.aside>
   );
 };

@@ -104,7 +104,7 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold mb-4">User Activity</h3>
-              <div className="h-6 bg-gray-100 rounded flex items-center justify-center">
+              <div className="h-64 bg-gray-100 rounded flex items-center justify-center">
                 <p className="text-gray-500">Chart Placeholder</p>
               </div>
             </div>

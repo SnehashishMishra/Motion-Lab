@@ -8,6 +8,7 @@ type SideBarLinksProps = {
   name: string;
   href: string;
   icon: React.ElementType;
+  index?: number;
 };
 
 const MotionLink = motion.create(Link);
@@ -18,7 +19,7 @@ const underlineVariants: Variants = {
     originX: 0.5,
   },
   hover: {
-    scaleX: 1,
+    scaleX: 1.05,
     originX: 0.5,
     transition: {
       duration: 0.3,
@@ -29,26 +30,24 @@ const underlineVariants: Variants = {
 
 const SideBarLink = ({ name, href, icon: Icon }: SideBarLinksProps) => {
   return (
-    <div className="flex w-full">
-      <MotionLink
-        href={href}
-        className="relative flex items-center gap-4 px-2.5 py-2.5 w-full rounded-lg text-neutral-300 hover:text-cyan-400 hover:bg-white/5 transition-all duration-300 overflow-hidden"
-        initial="initial"
-        whileHover="hover"
-      >
-        <span className="flex shrink-0 items-center justify-center">
-          <Icon size={22} strokeWidth={1.5} />
-        </span>
-        <span className="whitespace-nowrap font-medium text-[15px]">
-          {name}
-        </span>
+    <MotionLink
+      href={href}
+      className="relative flex items-center gap-4 px-2.5 py-2.5 w-full rounded-lg text-neutral-300 hover:text-cyan-400 hover:bg-white/5 transition-all duration-300 overflow-hidden"
+      initial="initial"
+      whileHover="hover"
+    >
+      <motion.span className="flex shrink-0 items-center justify-center">
+        <Icon size={22} strokeWidth={1.5} />
+      </motion.span>
+      <motion.span className="whitespace-nowrap font-medium text-[15px]">
+        {name}
+      </motion.span>
 
-        <motion.span
-          className="absolute left-0 bottom-0 w-full h-px bg-linear-to-r from-transparent via-cyan-500/50 to-transparent"
-          variants={underlineVariants}
-        />
-      </MotionLink>
-    </div>
+      <motion.span
+        className="absolute left-0 bottom-0 w-full h-px bg-linear-to-r from-transparent via-cyan-500/70 to-transparent"
+        variants={underlineVariants}
+      />
+    </MotionLink>
   );
 };
 

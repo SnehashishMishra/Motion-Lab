@@ -6,7 +6,6 @@ import {
   SettingsIcon,
   UserIcon,
 } from "lucide-react";
-import { delay } from "motion";
 import { motion } from "motion/react";
 import React, { useState } from "react";
 
