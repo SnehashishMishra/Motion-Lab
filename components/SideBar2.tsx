@@ -16,6 +16,7 @@ const components: ComponentLink[] = [
   { name: "Button", href: "/button", icon: MousePointerClick },
   { name: "Card", href: "/card", icon: Image },
   { name: "Dashboard", href: "/dashboard", icon: IconPackage },
+  { name: "Parallax", href: "/parallax", icon: Blocks },
 ];
 
 const childVariants: Variants = {
@@ -48,11 +49,11 @@ const SideBar2 = () => {
       initial={{ width: "4.5rem" }}
       whileHover={{ width: "16rem" }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="sticky top-0 shrink-0 h-dvh z-40 bg-neutral-950/40 border-r border-white/5 backdrop-blur-md overflow-y-auto overflow-x-hidden bg-dot-pattern pt-28 pb-6 px-3 flex flex-col group"
+      className="bg-dot-pattern group sticky top-0 z-40 flex h-dvh shrink-0 flex-col overflow-x-hidden overflow-y-auto border-r border-white/5 bg-neutral-950/40 px-3 pt-28 pb-6 backdrop-blur-md"
     >
-      <div className="flex items-center gap-4 px-2.5 mb-8 text-neutral-500 group-hover:text-cyan-500 transition-colors duration-300">
+      <div className="mb-8 flex items-center gap-4 px-2.5 text-neutral-500 transition-colors duration-300 group-hover:text-cyan-500">
         <Blocks size={24} strokeWidth={1.5} className="shrink-0" />
-        <span className="font-semibold text-xs tracking-widest uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <span className="text-xs font-semibold tracking-widest whitespace-nowrap uppercase opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           Components
         </span>
       </div>
@@ -61,10 +62,14 @@ const SideBar2 = () => {
         initial="initial"
         animate="animate"
         variants={parentVariants}
-        className="flex flex-col gap-2 w-full"
+        className="flex w-full flex-col gap-2"
       >
         {components.map((component) => (
-          <motion.li variants={childVariants} key={component.name} className="flex">
+          <motion.li
+            variants={childVariants}
+            key={component.name}
+            className="flex"
+          >
             <SideBarLink
               name={component.name}
               href={component.href}
