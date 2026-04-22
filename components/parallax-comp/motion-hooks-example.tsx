@@ -2,8 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { IconHome, IconRocket } from "@tabler/icons-react";
+import { IconRocket } from "@tabler/icons-react";
 import {
   motion,
   useMotionTemplate,
@@ -12,6 +11,8 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
+
+import HomeButton from "../HomeButton";
 
 const MotionHooksExample = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,21 +38,7 @@ const MotionHooksExample = () => {
 
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="group absolute top-4 left-4 cursor-pointer rounded-full bg-white/10 p-2 backdrop-blur-md transition-colors hover:bg-white/20"
-      >
-        <Link href="/">
-          <IconHome
-            className="h-5 w-5 text-neutral-200 group-hover:text-white"
-            strokeWidth={1}
-          />
-        </Link>
-      </motion.div>
-
+      <HomeButton />
       {/* ------------------------------------------ Main Parallax ------------------------------------------------------ */}
 
       <motion.div

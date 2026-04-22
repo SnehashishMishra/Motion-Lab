@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, Variants } from "motion/react";
 import React from "react";
+import { IconLayout, IconPackage } from "@tabler/icons-react";
+import { Blocks, Image, Layers3, MousePointerClick } from "lucide-react";
+import { motion, Variants } from "motion/react";
+
 import SideBarLink from "./SideBarLink";
-import { MousePointerClick, Image, Blocks } from "lucide-react";
-import { IconPackage } from "@tabler/icons-react";
 
 type ComponentLink = {
   name: string;
@@ -16,7 +17,8 @@ const components: ComponentLink[] = [
   { name: "Button", href: "/button", icon: MousePointerClick },
   { name: "Card", href: "/card", icon: Image },
   { name: "Dashboard", href: "/dashboard", icon: IconPackage },
-  { name: "Parallax", href: "/parallax", icon: Blocks },
+  { name: "Parallax", href: "/parallax", icon: Layers3 },
+  { name: "Layout", href: "/motion-layout", icon: IconLayout },
 ];
 
 const childVariants: Variants = {

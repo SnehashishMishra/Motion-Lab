@@ -1,5 +1,6 @@
-import MotionHooksExample from "@/components/parallax-comp/motion-hooks-example";
 import React from "react";
+
+import MotionHooksExample from "@/components/parallax-comp/motion-hooks-example";
 
 const page = () => {
   return (

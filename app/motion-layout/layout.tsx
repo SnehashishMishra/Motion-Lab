@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function ParallaxLayout({
+export default function MotionLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-neutral-900">
+    <div className="min-h-screen w-full overflow-x-hidden bg-white">
       {children}
     </div>
   );
