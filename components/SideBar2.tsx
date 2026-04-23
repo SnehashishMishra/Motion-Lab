@@ -1,7 +1,11 @@
 "use client";
 
 import React from "react";
-import { IconLayout, IconPackage } from "@tabler/icons-react";
+import {
+  IconBrandAirtable,
+  IconLayout,
+  IconPackage,
+} from "@tabler/icons-react";
 import { Blocks, Image, Layers3, MousePointerClick } from "lucide-react";
 import { motion, Variants } from "motion/react";
 
@@ -19,6 +23,11 @@ const components: ComponentLink[] = [
   { name: "Dashboard", href: "/dashboard", icon: IconPackage },
   { name: "Parallax", href: "/parallax", icon: Layers3 },
   { name: "Layout", href: "/motion-layout", icon: IconLayout },
+  {
+    name: "Animation Sequences",
+    href: "/animation-sequences",
+    icon: IconBrandAirtable,
+  },
 ];
 
 const childVariants: Variants = {
